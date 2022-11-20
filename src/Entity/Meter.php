@@ -35,9 +35,24 @@ class Meter
     private $url;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $time;
+
+     /**
+     * @ORM\Column(type="integer", length=255)
+     */
+    private $currentValue;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active = true;
+
+    public function __construct($currentValue = 0)
+    {
+        $this->currentValue = $currentValue;
+    }
 
     public function getId(): ?int
     {
@@ -68,14 +83,38 @@ class Meter
         return $this;
     }
 
-    public function getTime(): ?string
+    public function getTime(): ?int
     {
         return $this->time;
     }
 
-    public function setTime(string $time): self
+    public function setTime(int $time): self
     {
         $this->time = $time;
+
+        return $this;
+    }
+
+    public function getCurrentValue(): ?int
+    {
+        return $this->currentValue;
+    }
+
+    public function setCurrentValue(int $currentValue): self
+    {
+        $this->currentValue = $currentValue;
+
+        return $this;
+    }
+
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    public function setActive($active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
