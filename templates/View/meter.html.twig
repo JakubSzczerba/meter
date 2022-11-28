@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% set endTime = meter.time %}
+{% block title %} {{ meter.name }} {% endblock %}
+
+{% block body %} 
+    <label id="seconds">00</label> // {{ meter.time }}
+
+    <script>
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        setInterval(setTime, 1000);
+
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+        }
+
+        function pad(val)
+        {
+            var time = {{ endTime }};
+            var valString = val + "";
+            if(valString.length <= time)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+    </script>
+   
+{% endblock %}
